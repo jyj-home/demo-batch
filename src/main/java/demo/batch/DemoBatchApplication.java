@@ -1,23 +1,27 @@
 package demo.batch;
 
-import org.springframework.boot.SpringApplication;
+import org.springframework.batch.core.launch.support.CommandLineJobRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-public class DemoBatchApplication {
+public class DemoBatchApplication extends CommandLineJobRunner {
 
-  private static ConfigurableApplicationContext context;
+//  @Autowired
+//  private JobLauncher jobLauncher;
 
-  public static void main(String[] args) {
-    context = SpringApplication.run(DemoBatchApplication.class, args);
-    System.out.println("xxx");
-    shutDown();
-  }
+//  @Autowired
+//  private JobRepository jobRepository;
+//
+//  @Autowired
+//  private PlatformTransactionManager transactionManager;
 
-  public static void shutDown() {
-    int exitCode = SpringApplication.exit(context);
-    context.close();
-    System.exit(9);
+//  @Autowired
+//  ApplicationContext configurableApplicationContext;
+
+//  <bash$ java CommandLineJobRunner endOfDayJob.xml endOfDay schedule.date=2007-05-05,java.time.LocalDate
+
+  public static void main(String[] args) throws Exception {
+    CommandLineJobRunner.main(args);
+    System.out.println("xxxxxxxxx_main");
   }
 }
