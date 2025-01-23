@@ -5,17 +5,14 @@ import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.ImportResource;
 
-@SpringBootApplication
-@ImportResource("${batch.jobs.path}")
-public class DemoBatchApplication implements ApplicationRunner {
+//@SpringBootApplication
+//@ImportResource("${batch.jobs.path}")
+public class DemoBatchApplication7 implements ApplicationRunner {
 
   @Autowired
   private JobLauncher jobLauncher;
@@ -23,11 +20,8 @@ public class DemoBatchApplication implements ApplicationRunner {
   @Autowired
   private ApplicationContext context;
 
-  @Value("${batch.jobs.path}")
-  private String jobpath;
-
   public static void main(String[] args) throws Exception {
-    int ret = SpringApplication.exit(SpringApplication.run(DemoBatchApplication.class, args));
+    int ret = SpringApplication.exit(SpringApplication.run(DemoBatchApplication7.class, args));
     System.out.println("xxxxxxxxx_main:" + ret);
   }
 
