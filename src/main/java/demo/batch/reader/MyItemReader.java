@@ -1,6 +1,8 @@
 package demo.batch.reader;
 
 import demo.batch.gen.entity.Person;
+import demo.batch.gen.entity.PersonExample;
+import demo.batch.gen.entity.PersonExample.Criteria;
 import demo.batch.gen.repository.PersonMapper;
 import demo.batch.logic.DemoLogic;
 import jakarta.annotation.PostConstruct;
@@ -44,11 +46,19 @@ public class MyItemReader implements ItemReader<Person> {
 
   @Override
   public Person read() {
+
+//    System.out.println(DemoUtils.test());
+
     System.out.println(jobConfig);
     Person person = new Person();
     person.setPersonId("001");
     person.setName("小李");
-    List<Person> personList = demoLogic.getInfo(person);
+    PersonExample personExample = new PersonExample();
+    Criteria criteria = personExample.createCriteria();
+    criteria.andAgeIsNotNull();
+
+    List<Person> personList = personMapper.selectByExample(personExample);
+//    List<Person> personList = demoLogic.getInfo(person);
     if (iterator == null) {
       iterator = personList.iterator();
     }

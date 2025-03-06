@@ -11,17 +11,18 @@
 	<batch:job id="sampleJob">
 		<batch:step id="step1">
 			<batch:tasklet>
-				<batch:chunk reader="itemReader" processor="itemProcessor" writer="itemWriter" commit-interval="2" skip-policy="customSkipPolicy">
+				<batch:chunk reader="itemReader" writer="itemWriter" commit-interval="10" skip-limit="2147483647">
+					<batch:skippable-exception-classes>
+						<batch:include class="demo.batch.SkipException" />
+					</batch:skippable-exception-classes>
+<!--					<batch:skip-policy>-->
+<!--						<bean class="demo.batch.CustomSkipPolicy" />-->
+<!--					</batch:skip-policy>-->
 				</batch:chunk>
 			</batch:tasklet>
 		</batch:step>
 	</batch:job>
 
 	<bean id="itemReader" class="demo.batch.reader.MyItemReader" />
-	<bean id="itemProcessor" class="demo.batch.processor.MyItemProcessor" />
 	<bean id="itemWriter" class="demo.batch.writer.MyItemWriter" />
-	<bean id="customSkipPolicy" class="demo.batch.CustomSkipPolicy" />
-	<bean id="customRetryPolicy" class="demo.batch.CustomRetryPolicy" />
-	<bean id="alwaysSkipItemSkipPolicy" class="org.springframework.batch.core.step.skip.AlwaysSkipItemSkipPolicy" />
-	<bean id="neverRetryPolicy" class="org.springframework.retry.policy.NeverRetryPolicy" />
 </beans>

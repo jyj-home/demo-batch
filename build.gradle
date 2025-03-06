@@ -17,8 +17,6 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
-	
-	mockitoAgent
 }
 
 repositories {
@@ -52,17 +50,9 @@ dependencies {
     implementation 'org.apache.httpcomponents.client5:httpclient5:5.3.1'
     developmentOnly 'org.mybatis.generator:mybatis-generator-core:1.4.0'
     implementation 'org.springframework.data:spring-data-commons:3.4.1'
-    testImplementation 'org.mockito:mockito-core:5.15.2'
-    
-         mockitoAgent(libs.mockito) {
-         transitive = false
-     }
+    implementation 'net.bytebuddy:byte-buddy:1.17.1'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
-	
-	     test {
-         jvmArgs += "-javaagent:${configurations.mockitoAgent.asPath}"
-     }
+    useJUnitPlatform()
 }
